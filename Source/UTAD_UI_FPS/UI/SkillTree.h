@@ -7,6 +7,7 @@
 #include "../UTAD_UI_FPSCharacter.h"
 #include "SkillTree.generated.h"
 
+class USkillPoint;
 class UButton;
 class UCanvasPanel;
 class UTextBlock;
@@ -23,89 +24,32 @@ public:
 	UTextBlock* NumberSkillPoints;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UButton* m_velocityButtonLv1;
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UButton* m_velocityButtonLv2;
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UButton* m_velocityButtonLv3;
-
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UButton* m_healthButtonLv1;
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UButton* m_healthButtonLv2;
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UButton* m_healthButtonLv3;
-	
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UButton* m_damageButtonLv1;
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UButton* m_damageButtonLv2;
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
-	UButton* m_damageButtonLv3;
-
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UButton* m_cancelButton;
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UButton* m_acceptButton;;
 
-	
-	int m_skillPoints = 10;
+	UPROPERTY(EditAnywhere, Category = "UILogic", DisplayName = "Skill Points")
+	int m_skillPoints = 9;
 	int m_previousPoints;
-
-	bool m_velocityLv2Unlock = false;
-	bool m_velocityLv3Unlock = false;
-	bool m_healthLv2Unlock = false;
-	bool m_healthLv3Unlock = false;
-	bool m_damageLv2Unlock = false;
-	bool m_damageLv3Unlock = false;
+	
+	TArray<USkillPoint*> m_skillsButtons;
+	TArray<USkillPoint*> m_ButtonsPressed;
 	
 
 public:
 	virtual void NativeConstruct() override;
-
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 	void Show();
 
 	void Hide();
 	
-	UFUNCTION()
-	void OnVelocityButtonLv1Clicked();
-
-	UFUNCTION()
-	void OnVelocityButtonLv2Clicked();
 	
-	UFUNCTION()
-	void OnVelocityButtonLv3Clicked();
-	
-	void IncreaseVelocity(FString _buttonName);
-
-	UFUNCTION()
-	void OnHealthButtonLv1Clicked();
-
-	UFUNCTION()
-	void OnHealthButtonLv2Clicked();
-	
-	UFUNCTION()
-	void OnHealthButtonLv3Clicked();
-
-	void IncreaseHealth(FString _buttonName);
-
-	UFUNCTION()
-	void OnDamageButtonLv1Clicked();
-
-	UFUNCTION()
-	void OnDamageButtonLv2Clicked();
-	
-	UFUNCTION()
-	void OnDamageButtonLv3Clicked();
-
-	void IncreaseDamage(FString _buttonName);
-
 	UFUNCTION()
 	void CancelMenu();
 	
 	UFUNCTION()
 	void AcceptMenu();
-	
-	
 
+	UFUNCTION()
+	void SubtractPoints();
 };

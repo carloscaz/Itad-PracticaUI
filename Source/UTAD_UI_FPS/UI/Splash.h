@@ -5,6 +5,8 @@
 #include "Blueprint/UserWidget.h"
 #include "Splash.generated.h"
 
+class USkillTree;
+
 UCLASS()
 class UTAD_UI_FPS_API USplash : public UUserWidget
 {
@@ -17,6 +19,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI)
 	float SplashScreenDuration = 2.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI, DisplayName = "Skill Tree Screen")
+	TSubclassOf<USkillTree> m_skillTree;
 
 
 	
